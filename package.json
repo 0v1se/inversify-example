@@ -50,6 +50,9 @@
     "node": ">=8.9"
   },
   "dependencies": {
+    "inversify": "^5.0.1",
+    "inversify-binding-decorators": "^4.0.0",
+    "reflect-metadata": "^0.1.13",
     "sha.js": "^2.4.11"
   },
   "devDependencies": {
