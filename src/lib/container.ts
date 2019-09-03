@@ -1,4 +1,4 @@
-/* tslint:disable:max-classes-per-file */
+/* tslint:disable:max-classes-per-file no-empty */
 import { cache } from 'cache-decorator';
 import { inject } from 'inversify';
 import { provide } from 'inversify-binding-decorators';
@@ -26,5 +26,23 @@ export class ComplexComponent {
 
   public getValue(): string {
     return this.simple.getValue();
+  }
+}
+
+export interface Handler {
+  handle();
+}
+
+@provide("handler")
+export class FirstHandler implements Handler {
+  public handle(): void {
+
+  }
+}
+
+@provide("handler")
+export class SecondHandler implements Handler {
+  public handle(): void {
+
   }
 }

@@ -3,7 +3,7 @@ import test from 'ava';
 import { Container } from 'inversify';
 import { buildProviderModule } from 'inversify-binding-decorators';
 import 'reflect-metadata';
-import { ComplexComponent, SimpleComponent } from './container';
+import { ComplexComponent, Handler, SimpleComponent } from './container';
 
 test('should create container', t => {
   const c = new Container();
@@ -12,7 +12,7 @@ test('should create container', t => {
   t.true(c.get(ComplexComponent).getValue() === "testValue");
 });
 
-test('should get list of components', t => {
+test('should use cache', t => {
   const c = new Container();
   c.load(buildProviderModule());
   c.bind("value").toConstantValue("testValue");
@@ -22,3 +22,9 @@ test('should get list of components', t => {
   t.deepEqual(bean.counter, 1);
 });
 
+test('should get list of tagged', t => {
+  const c = new Container();
+  c.load(buildProviderModule());
+  const list = c.getAll<Handler>("handler");
+  t.deepEqual(list.length, 2);
+});
