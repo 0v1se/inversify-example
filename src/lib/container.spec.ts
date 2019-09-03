@@ -3,9 +3,7 @@ import test from 'ava';
 import { Container } from 'inversify';
 import { buildProviderModule } from 'inversify-binding-decorators';
 import 'reflect-metadata';
-import { ComplexComponent } from './container';
-import "./container-promise"
-import { initialize } from './init';
+import { ComplexComponent, SimpleComponent } from './container';
 
 test('should create container', t => {
   const c = new Container();
@@ -14,10 +12,13 @@ test('should create container', t => {
   t.true(c.get(ComplexComponent).getValue() === "testValue");
 });
 
-test('should create container with promises', async t => {
-  const c = await initialize(new Container());
+test('should get list of components', t => {
+  const c = new Container();
   c.load(buildProviderModule());
-  t.true(c.get<string>("result") === "resultValue");
+  c.bind("value").toConstantValue("testValue");
+  const bean = c.get<SimpleComponent>(SimpleComponent);
+  t.deepEqual(bean.getSomething(), "some");
+  t.deepEqual(bean.getSomething(), "some");
+  t.deepEqual(bean.counter, 1);
 });
-
 

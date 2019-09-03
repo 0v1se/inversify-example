@@ -39,7 +39,11 @@
     "emitDecoratorMetadata": true,
     "lib": ["es6"],
     "types": ["node", "reflect-metadata"],
-    "typeRoots": ["node_modules/@types", "src/types"]
+    "typeRoots": ["node_modules/@types", "src/types"],
+    "baseUrl": ".",
+    "paths": {
+      "cache-decorator": ["node_modules/cache-decorator/lib/index.d.ts"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules/**"],
