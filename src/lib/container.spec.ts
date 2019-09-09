@@ -28,3 +28,13 @@ test('should get list of tagged', t => {
   const list = c.getAll<Handler>("handler");
   t.deepEqual(list.length, 2);
 });
+
+test('should use singletons', t => {
+  const c = new Container();
+  c.options.defaultScope = 'Singleton';
+  c.load(buildProviderModule());
+  c.bind("value").toConstantValue("testValue");
+  const bean = c.get<SimpleComponent>(SimpleComponent);
+  const bean2 = c.get<SimpleComponent>(SimpleComponent);
+  t.true(bean === bean2);
+});
