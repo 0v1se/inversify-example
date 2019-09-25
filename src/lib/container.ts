@@ -30,7 +30,7 @@ export class ComplexComponent {
 }
 
 export interface Handler {
-  handle();
+  handle(): void;
 }
 
 @provide("handler")
