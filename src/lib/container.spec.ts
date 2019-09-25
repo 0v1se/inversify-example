@@ -56,6 +56,7 @@ test('should use modules', async t => {
   t.true(bean === bean2);
   const cc = c.get(ComplexComponent);
   t.true(cc != null);
+  t.true(cc.getValue() === "testValue")
 });
 
 
